@@ -54,8 +54,10 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    implementation(libs.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+//     ("com.github.bumptech.glide:compiler:4.16.0")
 }

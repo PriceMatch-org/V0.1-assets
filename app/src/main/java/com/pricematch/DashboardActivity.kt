@@ -8,27 +8,17 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.pricematch.adapter.CategoryAdapter
 import com.pricematch.adapter.FoodAdapter
 import com.pricematch.databinding.ActivityDashboardBinding
-import com.pricematch.model.Product
 import com.pricematch.viewmodel.ProductViewModel
 
 class DashboardActivity : AppCompatActivity() {
     private lateinit var bind: ActivityDashboardBinding
     private lateinit var auth: FirebaseAuth
     private val productViewModel : ProductViewModel by viewModels()
-
-
-    fun calculateNoOfColumns(context: Context, columnWidthDp: Int): Int {
-        val displayMetrics = context.resources.displayMetrics
-        val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
-        return maxOf(2, (screenWidthDp / columnWidthDp).toInt())
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,43 +36,24 @@ class DashboardActivity : AppCompatActivity() {
 //                Product("Salad", "300 g", "Fast Food", 4.8, R.drawable.google_svg, "$10"),
 //            )
 
-            // Set up RecyclerView with GridLayoutManager (2 columns)
-
             productViewModel.fetchProducts()
-            productViewModel.productList.observe(this) { it ->
+            productViewModel.categoryList.observe(this) { categoryList  ->
 
-                bind.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true)
-                bind.recyclerView.setHasFixedSize(true)
-                bind.recyclerView.isNestedScrollingEnabled = false
-//                bind.recyclerView.adapter = FoodAdapter(foodList, this)
-
-                bind.recyclerView.adapter = FoodAdapter(it)
+                bind.recyclerView.layoutManager = LinearLayoutManager(this)
+                bind.recyclerView.adapter = CategoryAdapter(categoryList)
+//                bind.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true)
+//                bind.recyclerView.setHasFixedSize(true)
+//                bind.recyclerView.isNestedScrollingEnabled = false
+//                bind.recyclerView.adapter = FoodAdapter(it)
             }
-
             productViewModel.errorMessage.observe(this) {er ->
                 Toast.makeText(this, er, Toast.LENGTH_LONG).show()
             }
-
-//            var spanCount = calculateNoOfColumns(this, 180); // Dynamic column count
-//            bind.recyclerView.setLayoutManager(GridLayoutManager(this, spanCount));
-//            bind.recyclerView.setAdapter(FoodAdapter(foodList, this));
-
-
-//            bind.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true)
-//            bind.recyclerView.setHasFixedSize(true)
-//            bind.recyclerView.isNestedScrollingEnabled = false
-//            bind.recyclerView.adapter = FoodAdapter(foodList, this)
-
-
-//            bind.recyclerView.layoutManager = GridLayoutManager(this, 2) // Change to 3 for 3-column layout
-//            bind.recyclerView.adapter = FoodAdapter(foodList, this)
-
             // Search Bar Functionality
             bind.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return false
                 }
-
                 override fun onQueryTextChange(newText: String?): Boolean {
 //                    val filteredList = foodList.filter {
 //                        it.productName!!.contains(newText.orEmpty(), ignoreCase = true)

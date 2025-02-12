@@ -37,6 +37,11 @@ class SingInActivity : AppCompatActivity() {
         binding.signGoogle.setOnClickListener {
             signIn()
         }
+
+        binding.directLogin.setOnClickListener {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            finish()
+        }
     }
 
     private fun signIn() {
