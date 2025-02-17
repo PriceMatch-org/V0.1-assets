@@ -26,25 +26,11 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(bind.root)
 
         try {
-            // Dummy Data
-//            val foodList = listOf(
-//                Product("Burger", "48 g", "Fast Food", 4.7, R.drawable.google_svg, "$20"),
-//                Product("Pizza", "500 g", "Fast Food",4.5, R.drawable.google_svg, "$15"),
-//                Product("Pasta", "350 g", "Fast Food",4.3, R.drawable.google_svg, "$12"),
-//                Product("Sandwich", "250 g", "Fast Food",4.6, R.drawable.google_svg, "$8"),
-//                Product("Fries", "200 g", "Fast Food",4.2, R.drawable.google_svg, "$5"),
-//                Product("Salad", "300 g", "Fast Food", 4.8, R.drawable.google_svg, "$10"),
-//            )
-
             productViewModel.fetchProducts()
             productViewModel.categoryList.observe(this) { categoryList  ->
 
                 bind.recyclerView.layoutManager = LinearLayoutManager(this)
                 bind.recyclerView.adapter = CategoryAdapter(categoryList)
-//                bind.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true)
-//                bind.recyclerView.setHasFixedSize(true)
-//                bind.recyclerView.isNestedScrollingEnabled = false
-//                bind.recyclerView.adapter = FoodAdapter(it)
             }
             productViewModel.errorMessage.observe(this) {er ->
                 Toast.makeText(this, er, Toast.LENGTH_LONG).show()

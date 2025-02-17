@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" package="com.pricematch">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.pricematch">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -16,17 +17,17 @@
         android:theme="@style/Theme.Pricematch"
         tools:targetApi="31">
         <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".CabServicesActivity"
             android:exported="false" />
         <activity
             android:name=".FoodDeliveryActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".DashboardActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".SingInActivity"
             android:exported="false" />

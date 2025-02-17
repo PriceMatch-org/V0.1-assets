@@ -10,4 +10,6 @@
     <color name="mainColor">#7F9DC9</color>
     <color name="gray">#D3D3D3</color>
     <color name="green">#076D45</color>
+    <color name="smokeWhite">#DA9D9898</color>
+
 </resources>

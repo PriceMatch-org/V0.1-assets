@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
+    app:cardUseCompatPadding="true"
+    android:background="@android:color/white"
+    android:padding="12dp"
+    android:layout_margin="8dp"
+    android:minHeight="120dp">  <!-- Ensures better spacing -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <!-- Product Image -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageCard"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/prodImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:padding="5dp"
+               android:src="@drawable/google_svg" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Product Name (Improved) -->
+        <TextView
+            android:id="@+id/prodName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Long Product Name That Will Now Show Fully"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintStart_toEndOf="@id/imageCard"
+            app:layout_constraintTop_toTopOf="@id/imageCard"
+            app:layout_constraintEnd_toStartOf="@id/quantityLayout"
+            android:paddingStart="12dp" />
+
+        <!-- Product Rating -->
+        <TextView
+            android:id="@+id/prodRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⭐⭐⭐⭐☆"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toEndOf="@id/imageCard"
+            app:layout_constraintTop_toBottomOf="@id/prodName"
+            android:paddingStart="12dp" />
+
+        <!-- Product Price -->
+        <TextView
+            android:id="@+id/prodPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$140"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintStart_toEndOf="@id/imageCard"
+            app:layout_constraintTop_toBottomOf="@id/prodRate"
+            android:paddingStart="12dp" />
+
+        <!-- Quantity Adjustment Layout -->
+        <LinearLayout
+            android:id="@+id/quantityLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/button_border"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Decrease Quantity Button (-) -->
+            <TextView
+                android:id="@+id/btnDecrease"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:minWidth="40dp"
+                android:minHeight="40dp" />
+
+            <!-- Quantity Display -->
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:minWidth="50dp"
+                android:minHeight="40dp" />
+
+            <!-- Increase Quantity Button (+) -->
+            <TextView
+                android:id="@+id/btnIncrease"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                android:minWidth="40dp"
+                android:minHeight="40dp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
