@@ -1,6 +1,5 @@
 package com.pricematch
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,20 +8,18 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.pricematch.adapter.CategoryAdapter
-import com.pricematch.adapter.FoodAdapter
-import com.pricematch.databinding.ActivityDashboardBinding
+import com.pricematch.databinding.ActivityFoodDashboardBinding
 import com.pricematch.viewmodel.ProductViewModel
 
-class DashboardActivity : AppCompatActivity() {
-    private lateinit var bind: ActivityDashboardBinding
-    private lateinit var auth: FirebaseAuth
+class FoodDashboardActivity : AppCompatActivity() {
+    private lateinit var bind: ActivityFoodDashboardBinding
+
     private val productViewModel : ProductViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bind = ActivityDashboardBinding.inflate(layoutInflater)
+        bind = ActivityFoodDashboardBinding.inflate(layoutInflater)
         setContentView(bind.root)
 
         try {
@@ -49,19 +46,15 @@ class DashboardActivity : AppCompatActivity() {
                 }
             })
 
-            auth = FirebaseAuth.getInstance()
-            val user = auth.currentUser
-            val firstName = user?.displayName?.split(" ")?.get(0) ?: "User"
-            bind.welcomeName.text = "Welcome $firstName to PriceMatch....."
-
-            bind.logout.setOnClickListener {
-                auth.signOut()
-                startActivity(Intent(this, SingInActivity::class.java))
+            bind.btnBack.setOnClickListener{
+                startActivity(Intent(this, MainDashboardActivity::class.java))
                 finish()
             }
 
+
+
         } catch (ex: Exception) {
-            Log.e("DashboardActivity", ex.message.toString())
+            Log.e("FoodDashboardActivity", ex.message.toString())
         }
     }
 }

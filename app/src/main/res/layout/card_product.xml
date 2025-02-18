@@ -5,8 +5,8 @@
     android:layout_width="230dp"
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
-    app:cardElevation="10dp"
-    android:background="@android:color/white"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/white"
     android:layout_margin="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_border"
-                android:text="Add "
+                android:text="Add " android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -81,48 +81,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:text="48 g"
+                android:text="48 g" android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/productName" />
-
-            <LinearLayout
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button_border"
-                android:orientation="horizontal"
-                android:layout_marginEnd="10dp" android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/productWeight"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/productWeight" >
-                <TextView
-                    android:id="@+id/quantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:text="Cart - 1"  android:layout_marginStart="16dp"
-                    android:gravity="center"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-            <!-- Multiple Images RecyclerView (Beside Rating) -->
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:id="@+id/recyclerViewImages"-->
-<!--                android:layout_width="80dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                android:orientation="horizontal"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/constraintLayout2"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />-->
 
             <!-- Rating Section -->
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -162,7 +123,8 @@
             <LinearLayout
                 android:id="@+id/layoutInstamart"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
@@ -173,11 +135,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="16dp"
-                    app:cardElevation="15dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
+                    app:cardBackgroundColor="@color/white"
 
-                    app:cardCornerRadius="200dp">
+                    app:cardCornerRadius="200dp"
+                    app:cardElevation="15dp">
 
                     <ImageView
                         android:layout_width="24dp"

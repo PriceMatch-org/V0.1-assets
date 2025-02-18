@@ -39,7 +39,7 @@ class SingInActivity : AppCompatActivity() {
         }
 
         binding.directLogin.setOnClickListener {
-            startActivity(Intent(this, DashboardActivity::class.java))
+            startActivity(Intent(this, MainDashboardActivity::class.java))
             finish()
         }
     }
@@ -68,7 +68,7 @@ class SingInActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, DashboardActivity::class.java))
+                    startActivity(Intent(this, MainDashboardActivity::class.java))
                     finish()
                 } else {
                     Log.w("FirebaseAuth", "signInWithCredential:failure", task.exception)

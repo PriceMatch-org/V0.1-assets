@@ -32,8 +32,8 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun checkUserState() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            // User is signed in, redirect to DashboardActivity
-            val intent = Intent(this, DashboardActivity::class.java)
+            // User is signed in, redirect to FoodDashboardActivity
+            val intent = Intent(this, MainDashboardActivity::class.java)
             startActivity(intent)
             finish()
         } else {
