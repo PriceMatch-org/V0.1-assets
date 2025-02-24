@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pricematch.adapter.CartAdapter
 import com.pricematch.databinding.ActivityCartBinding
@@ -59,6 +60,14 @@ class CartActivity : AppCompatActivity() {
         bind.rbInstamart.visibility = if (hasInstamart) View.VISIBLE else View.GONE
         bind.rbBlinkit.visibility = if (hasBlinkit) View.VISIBLE else View.GONE
         bind.rbZepto.visibility = if (hasZepto) View.VISIBLE else View.GONE
+
+        // Set text and drawable for Instamart radio button
+//        if (hasInstamart && cartItems.isNotEmpty()) {
+//            bind.rbInstamart.text = "Instamart ${cartItems[0].instamartPrice}"
+//            val instamartDrawable = ContextCompat.getDrawable(this, R.drawable.instamart)
+//            bind.rbInstamart.setCompoundDrawablesWithIntrinsicBounds(instamartDrawable, null, null, null)
+//            bind.rbInstamart.compoundDrawablePadding = 5
+//        }
 
 
         // Bind prices to radio button values

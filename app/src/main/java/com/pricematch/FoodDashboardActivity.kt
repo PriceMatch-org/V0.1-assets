@@ -15,7 +15,7 @@ import com.pricematch.viewmodel.ProductViewModel
 class FoodDashboardActivity : AppCompatActivity() {
     private lateinit var bind: ActivityFoodDashboardBinding
 
-    private val productViewModel : ProductViewModel by viewModels()
+    private val productViewModel: ProductViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,42 +23,55 @@ class FoodDashboardActivity : AppCompatActivity() {
         setContentView(bind.root)
 
         try {
-            productViewModel.fetchProducts()
-            productViewModel.categoryList.observe(this) { categoryList  ->
+            // Show ProgressBar when API call starts
+            bind.progressBar2.visibility = android.view.View.VISIBLE
 
+            // Fetch products from the ViewModel
+            productViewModel.fetchProducts()
+
+            // Observe the category list LiveData
+            productViewModel.categoryList.observe(this) { categoryList ->
+                // Hide ProgressBar when data is received
+                bind.progressBar2.visibility = android.view.View.GONE
+
+                // Set up RecyclerView
                 bind.recyclerView.layoutManager = LinearLayoutManager(this)
                 bind.recyclerView.adapter = CategoryAdapter(categoryList)
             }
-            productViewModel.errorMessage.observe(this) {er ->
-                Toast.makeText(this, er, Toast.LENGTH_LONG).show()
+
+            // Observe error messages
+            productViewModel.errorMessage.observe(this) { errorMessage ->
+                // Hide ProgressBar if an error occurs
+                bind.progressBar2.visibility = android.view.View.GONE
+                Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
             }
+
             // Search Bar Functionality
             bind.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return false
                 }
+
                 override fun onQueryTextChange(newText: String?): Boolean {
-//                    val filteredList = foodList.filter {
-//                        it.productName!!.contains(newText.orEmpty(), ignoreCase = true)
-//                    }
-//                    (bind.recyclerView.adapter as FoodAdapter).updateList(filteredList)
+                    // Implement search functionality here if needed
                     return true
                 }
             })
 
-            bind.btnBack.setOnClickListener{
+            // Back button click listener
+            bind.btnBack.setOnClickListener {
                 startActivity(Intent(this, MainDashboardActivity::class.java))
                 finish()
             }
 
-            bind.idCartFactor.setOnClickListener{
+            // Cart button click listener
+            bind.idCartFactor.setOnClickListener {
                 startActivity(Intent(this, CartActivity::class.java))
-
             }
 
-
-
         } catch (ex: Exception) {
+            // Hide ProgressBar if an exception occurs
+            bind.progressBar2.visibility = android.view.View.GONE
             Log.e("FoodDashboardActivity", ex.message.toString())
         }
     }

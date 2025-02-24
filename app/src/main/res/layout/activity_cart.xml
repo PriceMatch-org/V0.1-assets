@@ -99,6 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Instamart"
+                    android:textColor="@color/black"
                     android:drawableStart="@drawable/instamart_radio_btn"
                     android:drawablePadding="5dp" />
 
@@ -113,7 +114,7 @@
                     android:id="@+id/rbBlinkit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Blinkit"
+                    android:text="Blinkit" android:textColor="@color/black"
                     android:drawableStart="@drawable/blinkit_radio_btn"
                     android:drawablePadding="5dp"/>
 
@@ -148,7 +149,7 @@
                     android:id="@+id/rbZepto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Zepto"
+                    android:text="Zepto" android:textColor="@color/black"
                     android:drawableStart="@drawable/zepto_radio_btn"
                     android:drawablePadding="5dp"/>
 

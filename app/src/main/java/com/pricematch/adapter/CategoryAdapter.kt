@@ -20,6 +20,8 @@ class CategoryAdapter(private var categoryList: List<Category>) : RecyclerView.A
             productRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
             productRecyclerView.adapter = FoodAdapter(category.products)
         }
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
