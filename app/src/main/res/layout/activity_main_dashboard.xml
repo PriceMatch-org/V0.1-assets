@@ -54,6 +54,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
+    <!-- TabLayout for Indicators -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/idTabs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@+id/cardForFoodLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Carousel"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp" />
+
     <!-- Food Card Section -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardForFoodLayout"
@@ -130,7 +145,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:text="Cab Services" android:textColor="@color/black"
+                android:text="Cab Services"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
                 app:layout_constraintTop_toTopOf="@+id/imageView3" />
@@ -146,6 +162,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintEnd_toStartOf="@+id/textView12"
         app:layout_constraintTop_toTopOf="@+id/textView12" />
+
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"

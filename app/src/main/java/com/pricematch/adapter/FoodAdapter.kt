@@ -1,5 +1,6 @@
 package com.pricematch.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.*
@@ -15,60 +16,89 @@ import com.pricematch.manager.CartManager
 import com.pricematch.model.CartItem
 
 class FoodAdapter(private var foodList: List<Product>) : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
-    inner class FoodViewHolder(itemView: View, var context: Context) : RecyclerView.ViewHolder(itemView) {
+    inner class FoodViewHolder(itemView: View, var context: Context) :
+        RecyclerView.ViewHolder(itemView) {
         private val foodName: TextView = itemView.findViewById(R.id.productName)
         private val foodRating: TextView = itemView.findViewById(R.id.ratingNumber)
         private val foodWeight: TextView = itemView.findViewById(R.id.productWeight)
         private val foodImage: ImageView = itemView.findViewById(R.id.productImg)
-        private val foodPriceInsta: TextView = itemView.findViewById(R.id.productPriceInstmart)
+        private val foodPriceInst: TextView = itemView.findViewById(R.id.productPriceInstmart)
         private val foodPriceZepto: TextView = itemView.findViewById(R.id.productZepto)
-        private val foodPriceBlinkit: TextView = itemView.findViewById(R.id.productBlinkit)
+        private val foodPriceBlink: TextView = itemView.findViewById(R.id.productBlinkit)
         private val addButton: AppCompatButton = itemView.findViewById(R.id.addbutton)
-        //layout Content
-        private val layout1 : LinearLayout = itemView.findViewById(R.id.layoutInstamart)
-        private val layout2 : LinearLayout = itemView.findViewById(R.id.layoutBlinkit)
-        private val layout3 : LinearLayout = itemView.findViewById(R.id.layoutZepto)
+        private val layout1: LinearLayout = itemView.findViewById(R.id.layoutInstamart)
+        private val layout2: LinearLayout = itemView.findViewById(R.id.layoutBlinkit)
+        private val layout3: LinearLayout = itemView.findViewById(R.id.layoutZepto)
 
+        private lateinit var cartItem: CartItem
+
+        @SuppressLint("SetTextI18n", "SuspiciousIndentation")
         fun bind(foodItem: Product) {
-            foodName.text = foodItem.productName ?: "N/A"
-            foodRating.text = foodItem.rating?.toString() ?: "0.0"
-            foodWeight.text = foodItem.weight ?: "N/A"
-            // Load Image Using Glide
-                if (!foodItem.productImg.isNullOrEmpty()) {
-                    Glide.with(itemView.context)
-                        .load(foodItem.productImg[1])
-                        .placeholder(R.drawable.noimage)
-                        .into(foodImage)
-                }
-            // Display Prices
-            val priceText = StringBuilder()
-            foodItem.prices.forEach { price ->
-                if(price.instmart != null){
-                    foodPriceInsta.isVisible = true
-                    layout1.isVisible = true
-                    foodPriceInsta.text = "₹ ${price.instmart}"
-                } else if(price.blinkit != null){
-                    foodPriceBlinkit.isVisible = true
-                    layout2.isVisible = true
-                    foodPriceBlinkit.text = "₹ ${price.blinkit}"
-                } else {
-                    layout3.isVisible = true
-                    foodPriceZepto.isVisible = true
-                    foodPriceZepto.text = "₹ ${price.zepto}"
-                }
+            foodName.text = foodItem.productName
+            foodRating.text = foodItem.rating.toString()
+            foodWeight.text = foodItem.weight
+            if (foodItem.productImg.isNotEmpty()) {
+                Glide.with(itemView.context)
+                    .load(foodItem.productImg[1])
+                    .placeholder(R.drawable.noimage)
+                    .into(foodImage)
             }
-            //foodPrice.text = priceText.toString().trim()
-            // Add to Cart Button Click Listener
+
+            if (foodItem.prices[0].zepto != null) {
+                foodPriceZepto.isVisible = true
+                layout3.isVisible = true
+                foodPriceZepto.text = "₹ ${foodItem.prices[0].zepto}" //245 // null.
+            } else {
+                foodPriceZepto.isVisible = false
+                layout3.isVisible = false
+            }
+
+            if (foodItem.prices[0].blinkit != null) {
+                foodPriceBlink.isVisible = true
+                layout2.isVisible = true
+                foodPriceBlink.text = "₹ ${foodItem.prices[0].blinkit}" //null //525
+            } else {
+                foodPriceBlink.isVisible = false
+                layout2.isVisible = false
+            }
+
+            if (foodItem.prices[0].instmart != null) {
+                foodPriceInst.isVisible = true
+                layout1.isVisible = true
+                foodPriceInst.text = "₹ ${foodItem.prices[0].instmart}" //256 //544
+            } else {
+                foodPriceInst.isVisible = false
+                layout1.isVisible = false
+            }
             addButton.setOnClickListener {
-                val cartItem = CartItem(
+                var instmartPrice: Int? = null
+                var zeptoPrice: Int? = null
+                var blinkitPrice: Int? = null
+
+                if (foodItem.prices[0].zepto != null) {
+                    zeptoPrice = foodItem.prices[0].zepto
+                }
+                if (foodItem.prices[0].instmart != null) {
+                    instmartPrice = foodItem.prices[0].instmart
+                }
+                if (foodItem.prices[0].blinkit != null) {
+                    blinkitPrice = foodItem.prices[0].blinkit
+                }
+
+
+                cartItem = CartItem(
                     productName = foodItem.productName ?: "N/A",
-                    productPrice = foodItem.prices.firstOrNull()?.instmart ?: 0,
+                    productPrice = 0,
                     productImage = foodItem.productImg.firstOrNull() ?: "",
                     productRating = foodItem.rating ?: 0.0,
-                    quantity = 1
+                    quantity = 1,
+                    zeptoPrice = zeptoPrice ?: 0,
+                    instamartPrice = instmartPrice ?: 0,
+                    blinkitPrice = blinkitPrice ?: 0,
                 )
                 CartManager.addToCart(cartItem)
-                Toast.makeText(context, "${foodItem.productName} added to cart", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "${foodItem.productName} added to cart", Toast.LENGTH_SHORT)
+                    .show()
                 context.startActivity(Intent(context, CartActivity::class.java))
             }
         }

@@ -20,12 +20,23 @@ object CartManager {
         existingItem?.quantity = item.quantity
     }
 
+    fun removeFromCart(item: CartItem) {
+        cartItem.remove(item)
+    }
+
     fun getCartItems(): List<CartItem> {
         return cartItem
     }
 
-    fun calculateTotalPrice(): Int {
-        return cartItem.sumOf { it.productPrice * it.quantity }
+    fun calculateTotalPrice(selectedPlatform: String?): Int {
+        return cartItem.sumOf { item ->
+            when (selectedPlatform) {
+                "instamart" -> (item.instamartPrice ?: 0) * item.quantity
+                "blinkit" -> (item.blinkitPrice ?: 0) * item.quantity
+                "zepto" -> (item.zeptoPrice ?: 0) * item.quantity
+                else -> 0
+            }
+        }
     }
 
     fun clearCart() {

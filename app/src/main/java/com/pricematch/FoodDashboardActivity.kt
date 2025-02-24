@@ -51,6 +51,11 @@ class FoodDashboardActivity : AppCompatActivity() {
                 finish()
             }
 
+            bind.idCartFactor.setOnClickListener{
+                startActivity(Intent(this, CartActivity::class.java))
+
+            }
+
 
 
         } catch (ex: Exception) {

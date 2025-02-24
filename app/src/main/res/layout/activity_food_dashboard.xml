@@ -50,6 +50,17 @@
         app:layout_constraintTop_toTopOf="@+id/welcomeName"
         app:srcCompat="@drawable/vector_back" />
 
+    <ImageView
+        android:id="@+id/idCartFactor"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/welcomeName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toEndOf="@+id/welcomeName"
+        app:layout_constraintTop_toTopOf="@+id/welcomeName"
+        app:srcCompat="@drawable/cart" />
+
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="0dp"
