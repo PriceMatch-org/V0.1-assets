@@ -56,29 +56,29 @@ class CartActivity : AppCompatActivity() {
         val hasZepto = cartItems.any { it.zeptoPrice != null && it.zeptoPrice != 0 }
 
         // Set visibility of radio buttons based on availability
-        bind.constInstamartLayout.visibility = if (hasInstamart) View.VISIBLE else View.GONE
-        bind.constBlintkitLayout.visibility = if (hasBlinkit) View.VISIBLE else View.GONE
-        bind.constZeptoLayout.visibility = if (hasZepto) View.VISIBLE else View.GONE
+        bind.rbInstamart.visibility = if (hasInstamart) View.VISIBLE else View.GONE
+        bind.rbBlinkit.visibility = if (hasBlinkit) View.VISIBLE else View.GONE
+        bind.rbZepto.visibility = if (hasZepto) View.VISIBLE else View.GONE
 
 
         // Bind prices to radio button values
         if (hasInstamart) {
-            bind.rvInst.text = "₹ ${cartItems.sumOf { (it.instamartPrice ?: 0) * it.quantity }}"
+//            bind.rvInst.text = "₹ ${cartItems.sumOf { (it.instamartPrice ?: 0) * it.quantity }}"
         }
         if (hasBlinkit) {
-            bind.rvBlinkit.text = "₹ ${cartItems.sumOf { (it.blinkitPrice ?: 0) * it.quantity }}"
+//            bind.rvBlinkit.text = "₹ ${cartItems.sumOf { (it.blinkitPrice ?: 0) * it.quantity }}"
         }
         if (hasZepto) {
-            bind.rvzepto.text = "₹ ${cartItems.sumOf { (it.zeptoPrice ?: 0) * it.quantity }}"
+//            bind.rvzepto.text = "₹ ${cartItems.sumOf { (it.zeptoPrice ?: 0) * it.quantity }}"
         }
 
         // Set default selection if any platform is available
-//        when {
-//            hasInstamart -> bind.rbInstamart.isChecked = true
-//            hasBlinkit -> bind.rbBlinkit.isChecked = true
-//            hasZepto -> bind.rbZepto.isChecked = true
-//            else -> bind.radioGroup.clearCheck() // Clear selection if no platform is available
-//        }
+        when {
+            hasInstamart -> bind.rbInstamart.isChecked = true
+            hasBlinkit -> bind.rbBlinkit.isChecked = true
+            hasZepto -> bind.rbZepto.isChecked = true
+            else -> bind.radioGroup.clearCheck() // Clear selection if no platform is available
+        }
     }
 
     fun updateTotalPrice() {
@@ -89,9 +89,9 @@ class CartActivity : AppCompatActivity() {
             else -> {
                 // If no radio button is selected, default to the first available platform
                 when {
-                    bind.constInstamartLayout.visibility == View.VISIBLE -> "instamart"
-                    bind.constBlintkitLayout.visibility == View.VISIBLE -> "blinkit"
-                    bind.constZeptoLayout.visibility == View.VISIBLE -> "zepto"
+//                    bind.constInstamartLayout.visibility == View.VISIBLE -> "instamart"
+//                    bind.constBlintkitLayout.visibility == View.VISIBLE -> "blinkit"
+//                    bind.constZeptoLayout.visibility == View.VISIBLE -> "zepto"
                     else -> null // No platform available
                 }
             }
