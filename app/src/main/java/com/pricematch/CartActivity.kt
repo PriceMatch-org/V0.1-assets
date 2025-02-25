@@ -2,10 +2,8 @@ package com.pricematch
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pricematch.adapter.CartAdapter
 import com.pricematch.databinding.ActivityCartBinding
@@ -51,42 +49,116 @@ class CartActivity : AppCompatActivity() {
     private fun setupRadioButtons() {
         val cartItems = CartManager.getCartItems()
 
-        // Check if any item has prices for Instamart, Blinkit, or Zepto
-        val hasInstamart = cartItems.any { it.instamartPrice != null && it.instamartPrice != 0 }
-        val hasBlinkit = cartItems.any { it.blinkitPrice != null && it.blinkitPrice != 0 }
-        val hasZepto = cartItems.any { it.zeptoPrice != null && it.zeptoPrice != 0 }
+        // Check if ALL items have prices for Instamart, Blinkit, or Zepto
+        val allHaveInstamart = cartItems.all { it.instamartPrice != null && it.instamartPrice != 0 }
+        val allHaveBlinkit = cartItems.all { it.blinkitPrice != null && it.blinkitPrice != 0 }
+        val allHaveZepto = cartItems.all { it.zeptoPrice != null && it.zeptoPrice != 0 }
 
-        // Set visibility of radio buttons based on availability
-        bind.rbInstamart.visibility = if (hasInstamart) View.VISIBLE else View.GONE
-        bind.rbBlinkit.visibility = if (hasBlinkit) View.VISIBLE else View.GONE
-        bind.rbZepto.visibility = if (hasZepto) View.VISIBLE else View.GONE
-
-        // Set text and drawable for Instamart radio button
-//        if (hasInstamart && cartItems.isNotEmpty()) {
-//            bind.rbInstamart.text = "Instamart ${cartItems[0].instamartPrice}"
-//            val instamartDrawable = ContextCompat.getDrawable(this, R.drawable.instamart)
-//            bind.rbInstamart.setCompoundDrawablesWithIntrinsicBounds(instamartDrawable, null, null, null)
-//            bind.rbInstamart.compoundDrawablePadding = 5
+//        val selectedPlatform = when (bind.radioGroup.checkedRadioButtonId) {
+//            R.id.rbInstamart -> "instamart"
+//            R.id.rbBlinkit -> "blinkit"
+//            R.id.rbZepto -> "zepto"
+//            else -> {
+//                when {
+//                    else -> null // No platform available
+//                }
+//            }
 //        }
 
+        // Set visibility and selectability of radio buttons based on availability
+        if (allHaveInstamart) {
+            // Only Instamart is available for all items
+            bind.rbInstamart.isChecked = true
+            bind.rbInstamart.isEnabled = true
+            bind.rbBlinkit.isEnabled = false
+            bind.rbZepto.isEnabled = false
 
-        // Bind prices to radio button values
-        if (hasInstamart) {
-//            bind.rvInst.text = "₹ ${cartItems.sumOf { (it.instamartPrice ?: 0) * it.quantity }}"
-        }
-        if (hasBlinkit) {
-//            bind.rvBlinkit.text = "₹ ${cartItems.sumOf { (it.blinkitPrice ?: 0) * it.quantity }}"
-        }
-        if (hasZepto) {
-//            bind.rvzepto.text = "₹ ${cartItems.sumOf { (it.zeptoPrice ?: 0) * it.quantity }}"
-        }
+            // Set text for other platforms
+            val selectedPlatform = when (bind.radioGroup.checkedRadioButtonId) {
+                R.id.rbInstamart -> "instamart"
+                R.id.rbBlinkit -> "blinkit"
+                R.id.rbZepto -> "zepto"
+                else -> {
+                    when {
+                        else -> null // No platform available
+                    }
+                }
+            }
 
-        // Set default selection if any platform is available
-        when {
-            hasInstamart -> bind.rbInstamart.isChecked = true
-            hasBlinkit -> bind.rbBlinkit.isChecked = true
-            hasZepto -> bind.rbZepto.isChecked = true
-            else -> bind.radioGroup.clearCheck() // Clear selection if no platform is available
+            val totalPrice = CartManager.calculateTotalPrice(selectedPlatform)
+            bind.rbInstamart.text = "Instamart ₹ ${totalPrice}"
+            bind.rbZepto.text = "Not available for all items"
+            bind.rbBlinkit.text = "Not available for all items"
+
+
+        } else if (allHaveBlinkit) {
+            // Only Blinkit is available for all items
+            bind.rbBlinkit.isChecked = true
+            bind.rbBlinkit.isEnabled = true
+            bind.rbInstamart.isEnabled = false
+            bind.rbZepto.isEnabled = false
+
+            // Set text for other platforms
+            val selectedPlatform = when (bind.radioGroup.checkedRadioButtonId) {
+                R.id.rbInstamart -> "instamart"
+                R.id.rbBlinkit -> "blinkit"
+                R.id.rbZepto -> "zepto"
+                else -> {
+                    when {
+                        else -> null // No platform available
+                    }
+                }
+            }
+
+            val totalPrice = CartManager.calculateTotalPrice(selectedPlatform)
+            bind.rbInstamart.text = "Not available for all items"
+            bind.rbZepto.text = "Not available for all items"
+            bind.rbBlinkit.text = "Blinkit ₹ ${totalPrice}"
+        } else if (allHaveZepto) {
+            // Only Zepto is available for all items
+            bind.rbZepto.isChecked = true
+            bind.rbZepto.isEnabled = true
+            bind.rbInstamart.isEnabled = false
+            bind.rbBlinkit.isEnabled = false
+
+            // Set text for other platforms
+            val selectedPlatform = when (bind.radioGroup.checkedRadioButtonId) {
+                R.id.rbInstamart -> "instamart"
+                R.id.rbBlinkit -> "blinkit"
+                R.id.rbZepto -> "zepto"
+                else -> {
+                    when {
+                        else -> null // No platform available
+                    }
+                }
+            }
+
+            val totalPrice = CartManager.calculateTotalPrice(selectedPlatform)
+            bind.rbInstamart.text = "Not available for all items"
+            bind.rbZepto.text = "Zepto ₹ ${totalPrice}"
+            bind.rbBlinkit.text = "Not available for all items"
+        } else {
+            // Mixed availability: Enable all available platforms
+//            bind.rbInstamart.isEnabled = cartItems.any { it.instamartPrice != null && it.instamartPrice != 0 }
+//            bind.rbBlinkit.isEnabled = cartItems.any { it.blinkitPrice != null && it.blinkitPrice != 0 }
+//            bind.rbZepto.isEnabled = cartItems.any { it.zeptoPrice != null && it.zeptoPrice != 0 }
+//
+//            // Reset text for all radio buttons
+//            bind.rbInstamart.text = "Instamart"
+//            bind.rbBlinkit.text = "Blinkit"
+//            bind.rbZepto.text = "Zepto"
+
+            bind.rbInstamart.text = "Not available for all items"
+            bind.rbZepto.text = "Not available for all items"
+            bind.rbBlinkit.text = "Not available for all items"
+
+            // Set default selection if any platform is available
+//            when {
+//                bind.rbInstamart.isEnabled -> bind.rbInstamart.isChecked = true
+//                bind.rbBlinkit.isEnabled -> bind.rbBlinkit.isChecked = true
+//                bind.rbZepto.isEnabled -> bind.rbZepto.isChecked = true
+//                else -> bind.radioGroup.clearCheck() // Clear selection if no platform is available
+//            }
         }
     }
 
@@ -96,11 +168,7 @@ class CartActivity : AppCompatActivity() {
             R.id.rbBlinkit -> "blinkit"
             R.id.rbZepto -> "zepto"
             else -> {
-                // If no radio button is selected, default to the first available platform
                 when {
-//                    bind.constInstamartLayout.visibility == View.VISIBLE -> "instamart"
-//                    bind.constBlintkitLayout.visibility == View.VISIBLE -> "blinkit"
-//                    bind.constZeptoLayout.visibility == View.VISIBLE -> "zepto"
                     else -> null // No platform available
                 }
             }

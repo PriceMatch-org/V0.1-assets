@@ -13,4 +13,14 @@
     <color name="smokeWhite">#DA9D9898</color>
     <color name="progress_color">#FF5722</color>
 
+<!--    dart-->
+    <color name="dart_bg">#020011</color>
+    <color name="dart_txt1">#F6AF44</color>
+    <color name="dart_txt2">#EA7792</color>
+    <color name="dart_txt3">#CB3CFE</color>
+    <color name="dart_txt4">#CC3BFE</color>
+    <color name="dart_txt5">#B25AFE</color>
+    <color name="dart_txt6">#2DF5FE</color>
+    <color name="dart_txt7">#41DEFE</color>
+
 </resources>
