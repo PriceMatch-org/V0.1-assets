@@ -15,6 +15,7 @@ object CartManager {
         }
     }
 
+    //+ not added
     fun updateCartItem(item: CartItem) {
         val existingItem = cartItem.find { it.productName == item.productName }
         existingItem?.quantity = item.quantity

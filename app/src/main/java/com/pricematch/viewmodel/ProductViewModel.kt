@@ -1,34 +1,26 @@
 package com.pricematch.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
 import com.pricematch.api.RetrofitCaller
-import com.pricematch.model.*
-import retrofit2.*
+import com.pricematch.model.Category
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ProductViewModel : ViewModel() {
+class ProductViewModel(application: Application) : AndroidViewModel(application) {
+    private val apiService = RetrofitCaller.createApiService(application.applicationContext)
 
-    val categoryList = MutableLiveData<List<Category>>()  // Change from List<Product> to List<Category>
+    val categoryList = MutableLiveData<List<Category>>()
     val errorMessage = MutableLiveData<String>()
 
-    fun fetchProducts(retryCount: Int = 3) {
-        RetrofitCaller.instance.getProducts("team").enqueue(object : Callback<ApiResponse> {
-            override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
-                if (response.isSuccessful) {
-                    val categories = response.body()?.categories ?: emptyList()
-                    categoryList.postValue(categories)  // Store categories instead of flattening products
-                } else {
-                    errorMessage.postValue("API Error: ${response.message()}")
-                }
+    fun fetchProducts(page: Int = 1, limit: Int = 10) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = apiService.getProducts("team", page, limit)
+                categoryList.postValue(response.categories)
+            } catch (e: Exception) {
+                errorMessage.postValue("Network Error: ${e.message}")
             }
-
-            override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
-                if (retryCount > 0) {
-                    fetchProducts(retryCount - 1)  // Retry API call
-                } else {
-                    errorMessage.postValue("Network Error: ${t.message}")
-                }
-            }
-        })
+        }
     }
 }

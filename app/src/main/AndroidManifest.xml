@@ -29,9 +29,6 @@
             android:name=".CabServicesActivity"
             android:exported="false" />
         <activity
-            android:name=".FoodDeliveryActivity"
-            android:exported="false" />
-        <activity
             android:name=".FoodDashboardActivity"
             android:exported="false" />
         <activity

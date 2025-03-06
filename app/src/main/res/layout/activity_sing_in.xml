@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainColor"
+    android:background="@color/dart_bg"
     tools:context=".SingInActivity">
 
     <!-- Logo -->
@@ -97,84 +97,4 @@
             android:text="By continuing, you agree to our \n Terms of Service and Privacy Policy"/>
 
     </LinearLayout>
-
-<!--    &lt;!&ndash; Email Input &ndash;&gt;-->
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/emailInputLayout"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="32dp"-->
-<!--        android:layout_marginTop="100dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/emailEditText"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="@font/goudy_book"-->
-<!--            android:hint="@string/email_hint"-->
-<!--            android:inputType="textEmailAddress" />-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--    &lt;!&ndash; Password Input &ndash;&gt;-->
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/passwordInputLayout"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="32dp"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/emailInputLayout">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/passwordEditText"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:fontFamily="@font/goudy_book"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="@string/password_hint"-->
-<!--            android:inputType="textPassword" />-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
-<!--    &lt;!&ndash; Login Button &ndash;&gt;-->
-<!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/loginButton"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="32dp"-->
-<!--        android:background="@android:color/black"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:layout_marginTop="24dp"-->
-<!--        android:fontFamily="@font/goudy_book"-->
-<!--        android:text="@string/login"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />-->
-
-<!--    &lt;!&ndash; Google Sign-In Button &ndash;&gt;-->
-<!--    <com.google.android.gms.common.SignInButton-->
-<!--        android:id="@+id/signGoogle"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="32dp"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:fontFamily="@font/goudy_book"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/loginButton" />-->
-
-<!--    &lt;!&ndash; Sign Up Text &ndash;&gt;-->
-<!--    <TextView-->
-<!--        android:id="@+id/signUpText"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:fontFamily="@font/goudy_book"-->
-<!--        android:text="@string/sign_up_text"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/signGoogle"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent" />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

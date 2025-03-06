@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/mainColor"
+    android:background="@color/dart_bg"
     android:layout_height="match_parent"
     tools:context=".SplashScreenActivity">
 
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/goudy_book"
         android:text="PriceMatch"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -22,7 +22,7 @@ class FoodAdapter(private var foodList: List<Product>) : RecyclerView.Adapter<Fo
         private val foodRating: TextView = itemView.findViewById(R.id.ratingNumber)
         private val foodWeight: TextView = itemView.findViewById(R.id.productWeight)
         private val foodImage: ImageView = itemView.findViewById(R.id.productImg)
-        private val foodPriceInst: TextView = itemView.findViewById(R.id.productPriceInstmart)
+        private val foodPriceInst: TextView = itemView.findViewById(R.id.productPriceInstamart)
         private val foodPriceZepto: TextView = itemView.findViewById(R.id.productZepto)
         private val foodPriceBlink: TextView = itemView.findViewById(R.id.productBlinkit)
         private val addButton: AppCompatButton = itemView.findViewById(R.id.addbutton)
@@ -43,11 +43,10 @@ class FoodAdapter(private var foodList: List<Product>) : RecyclerView.Adapter<Fo
                     .placeholder(R.drawable.noimage)
                     .into(foodImage)
             }
-
             if (foodItem.prices[0].zepto != null) {
                 foodPriceZepto.isVisible = true
                 layout3.isVisible = true
-                foodPriceZepto.text = "₹ ${foodItem.prices[0].zepto}" //245 // null.
+                foodPriceZepto.text = "₹ ${foodItem.prices[0].zepto}"
             } else {
                 foodPriceZepto.isVisible = false
                 layout3.isVisible = false
@@ -56,7 +55,7 @@ class FoodAdapter(private var foodList: List<Product>) : RecyclerView.Adapter<Fo
             if (foodItem.prices[0].blinkit != null) {
                 foodPriceBlink.isVisible = true
                 layout2.isVisible = true
-                foodPriceBlink.text = "₹ ${foodItem.prices[0].blinkit}" //null //525
+                foodPriceBlink.text = "₹ ${foodItem.prices[0].blinkit}"
             } else {
                 foodPriceBlink.isVisible = false
                 layout2.isVisible = false
@@ -65,13 +64,13 @@ class FoodAdapter(private var foodList: List<Product>) : RecyclerView.Adapter<Fo
             if (foodItem.prices[0].instmart != null) {
                 foodPriceInst.isVisible = true
                 layout1.isVisible = true
-                foodPriceInst.text = "₹ ${foodItem.prices[0].instmart}" //256 //544
+                foodPriceInst.text = "₹ ${foodItem.prices[0].instmart}"
             } else {
                 foodPriceInst.isVisible = false
                 layout1.isVisible = false
             }
             addButton.setOnClickListener {
-                var instmartPrice: Int? = null
+                var instamartPrice: Int? = null
                 var zeptoPrice: Int? = null
                 var blinkitPrice: Int? = null
 
@@ -79,21 +78,19 @@ class FoodAdapter(private var foodList: List<Product>) : RecyclerView.Adapter<Fo
                     zeptoPrice = foodItem.prices[0].zepto
                 }
                 if (foodItem.prices[0].instmart != null) {
-                    instmartPrice = foodItem.prices[0].instmart
+                    instamartPrice = foodItem.prices[0].instmart
                 }
                 if (foodItem.prices[0].blinkit != null) {
                     blinkitPrice = foodItem.prices[0].blinkit
                 }
-
-
                 cartItem = CartItem(
-                    productName = foodItem.productName ?: "N/A",
+                    productName = foodItem.productName,
                     productPrice = 0,
                     productImage = foodItem.productImg.firstOrNull() ?: "",
-                    productRating = foodItem.rating ?: 0.0,
+                    productRating = foodItem.rating,
                     quantity = 1,
                     zeptoPrice = zeptoPrice ?: 0,
-                    instamartPrice = instmartPrice ?: 0,
+                    instamartPrice = instamartPrice ?: 0,
                     blinkitPrice = blinkitPrice ?: 0,
                 )
                 CartManager.addToCart(cartItem)

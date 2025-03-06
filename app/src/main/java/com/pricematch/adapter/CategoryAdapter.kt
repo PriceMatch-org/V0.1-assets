@@ -10,18 +10,15 @@ import com.pricematch.R
 class CategoryAdapter(private var categoryList: List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         private val categoryName: TextView = itemView.findViewById(R.id.categoryName)
         private val productRecyclerView: RecyclerView = itemView.findViewById(R.id.productRecyclerView)
 
         fun bind(category: Category) {
             categoryName.text = category.name
-
-            // Set up the child RecyclerView (for Products inside the category)
             productRecyclerView.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
             productRecyclerView.adapter = FoodAdapter(category.products)
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
